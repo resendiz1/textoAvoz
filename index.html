@@ -78,6 +78,12 @@
       if (!utterance) {
         utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = "es-ES";
+
+        // Resetear utterance cuando termine de hablar
+        utterance.onend = () => {
+          utterance = null;
+          isPaused = false;
+        };
       }
       synth.speak(utterance);
     } else if (isPaused) {
@@ -124,6 +130,7 @@
     alert("Grabando 5 segundos de audio...");
   });
 </script>
+
 
 </body>
 </html>
